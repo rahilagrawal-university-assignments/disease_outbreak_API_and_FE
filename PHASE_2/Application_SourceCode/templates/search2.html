@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Outbreak Alerts</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="../static/styles/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="../static/styles/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../static/styles/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav navbar-dark bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Outbreak Alerts</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="table">
+                  <i class="fas fa-fw fa-table"></i>
+                  <span>All Articles</span></a>
+              </li>
+        
+
+            <li class="nav-item">
+                <a class="nav-link" href="news?location={{location}}&disease={{disease}}&endDate={{endDate}}">
+                    <i class="fas fa-fw fa-bell"></i>
+                    <span>Latest News</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+                <div>&nbsp;</div>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Cases
+                                                Hospitalised</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{hosp}}</div>
+                                            <small>Cases about people that are undergoing treatment at hospitals</small>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-fw fa-stethoscope fa-2x text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                    <a class="card-footer text-black small" href="details?type=hospitalised">
+                                        <span class="float-left">View Details</span>
+                                        <span class="float-right">
+                                            <i class="fas fa-angle-right"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Cases
+                                                Infected</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{infected}}</div>
+                                            <small>Cases about people that have been infected</small>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-biohazard fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                    <a class="card-footer text-black small" href="details?type=infected">
+                                        <span class="float-left">View Details</span>
+                                        <span class="float-right">
+                                            <i class="fas fa-angle-right"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Cases
+                                                Recovered</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{recovered}}</div>
+                                            <small>Cases about people that have recovered from the disease
+                                                outbreak(s)</small>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-heartbeat fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                    <a class="card-footer text-black small" href="details?type=recovered">
+                                        <span class="float-left">View Details</span>
+                                        <span class="float-right">
+                                            <i class="fas fa-angle-right"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-danger shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Cases
+                                                that have Died</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{death}}</div>
+                                            <small>Cases about people that died from the disease(s)</small>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                    <a class="card-footer text-black small" href="details?type=death">
+                                        <span class="float-left">View Details</span>
+                                        <span class="float-right">
+                                            <i class="fas fa-angle-right"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                Number of
+                                {% if disease %}
+                                {{disease}}
+                                {% endif %}
+                                Cases
+                                {% if location %}
+                                for {{location}}
+                                {% endif %}</h6>
+                        </div>
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <div class="chart-area">
+                                <canvas id="myAreaChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                            {% if disease %}
+                            {% if location %}
+                            <!-- Donut Chart -->
+                            <div class="col-xl col-lg-5">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Spread of Cases for {{disease}} in
+                                            {{location}}</h6>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4">
+                                            <canvas id="bothChart"></canvas>
+                                        </div>
+                                        <hr>
+        
+                                    </div>
+                                </div>
+                            </div>
+                            {% else %}
+                            <!-- Donut Chart -->
+                            <div class="col-xl col-lg-5">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Spread of {{disease}} outbreaks globally</h6>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4">
+                                            <canvas id="locationsOnlyChart"></canvas>
+                                        </div>
+                                        <hr>
+        
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Donut Chart -->
+                            <div class="col-xl col-lg-5">
+                                    <div class="card shadow mb-4">
+                                        <!-- Card Header - Dropdown -->
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Spread of Cases for {{disease}} globally</h6>
+                                        </div>
+                                        <!-- Card Body -->
+                                        <div class="card-body">
+                                            <div class="chart-pie pt-4">
+                                                <canvas id="bothChart"></canvas>
+                                            </div>
+                                            <hr>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% else %}
+                            <!-- Donut Chart -->
+                            <div class="col-xl col-lg-5">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Spread of Diseases Outbreaks in {{location}} (%)</h6>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4">
+                                            <canvas id="diseaseOnlyChart"></canvas>
+                                        </div>
+                                        <hr>
+        
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Donut Chart -->
+                            <div class="col-xl col-lg-5">
+                                    <div class="card shadow mb-4">
+                                        <!-- Card Header - Dropdown -->
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Spread of Cases for all Diseases in {{location}}</h6>
+                                        </div>
+                                        <!-- Card Body -->
+                                        <div class="card-body">
+                                            <div class="chart-pie pt-4">
+                                                <canvas id="bothChart"></canvas>
+                                            </div>
+                                            <hr>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                    </div>
+
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Map</h6>
+                        </div>
+                        <div class="card-body">
+                            <div id="map" style="height: 500px; width: 970px"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+    </div>
+    <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../static/styles/vendor/jquery/jquery.min.js"></script>
+    <script src="../static/styles/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../static/styles/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../static/styles/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="../static/styles/vendor/chart.js/Chart.min.js"></script>
+    <script src="../static/styles/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../static/styles/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="../static/styles/js/demo/datatables-demo.js"></script>
+    <script>
+        var list = [];
+    </script>
+
+{% for m in mapList %}
+    {% if m["affected"] > 0 %}
+    <script>
+        var temp = {
+            name: "{{m["countryName"]}}",
+                centre: {
+                    lat: {{m["coord"]["lat"]}},
+                    lng: {{m["coord"]["long"]}}
+                },
+                affected: "{{m["affected"]}}"
+        }
+        list.push(temp)
+</script>
+    {% endif %}
+{% endfor %}
+
+<script>
+    var map;
+    var red = '#FF0000'
+    var orange = '#FF7F00'
+    var yellow = '#FFFF00'
+    var green = '#00FF00'
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {"lat": 18, "lng": 63},
+            zoom: 3
+        });
+
+
+        for (var l in list) { 
+            // Add the circle for this city to the map.
+            console.log(list[l].name)
+            console.log(list[l].centre)
+
+            if (list[l].affected > 10000) {
+                var colour = red;
+            } else if (list[l].affected > 1000) {
+                var colour = orange;
+            } else if (list[l].affected > 100) {
+                var colour = yellow;
+            } else {
+                var colour = green;
+    }
+        var cityCircle = new google.maps.Circle({
+            strokeColor: colour,
+            strokeOpacity: 0.9,
+            strokeWeight: 1,
+            fillColor: colour,
+            fillOpacity: 0.45,
+            map: map,
+            center: list[l].centre,
+            radius: Math.cbrt(list[l].affected) * 30000
+        });
+    }
+    }
+</script>
+
+
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2yKONwMZT0bujaWLZ9D-WcPkK0Ezerzw&libraries=drawing&callback=initMap"
+    async defer></script>
+
+</body>
+
+<script>
+    var dates = [];
+    var outbreak_list = {{outbreak_list|tojson}};
+    var myLabels;
+    var myData;
+
+    outbreak_list.sort((a, b) => {
+        a = a.date_of_publication.split('-');
+        b = b.date_of_publication.split('-');
+        return a > b ? 1 : a < b ? -1 : 0;
+    });
+
+    for (var i = 0; i < outbreak_list.length; i++) {
+        var datePub = outbreak_list[i].date_of_publication;
+        datePub = datePub.substring(0, datePub.indexOf("T")).split('-');
+        const found = dates.some(el => el.year === datePub[0] && el.month === datePub[1]);
+
+        if (found) {
+            dates.forEach(el => {
+                if (el.year === datePub[0] && el.month === datePub[1]) {
+                    el.num++;
+                }
+            });
+        } else {
+            dateData = {
+                year: datePub[0],
+                month: datePub[1],
+                num: 1,
+            };
+            dates.push(dateData);
+        }
+    }
+
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    myLabels = dates.reduce((arr, elm) => {
+        var string = months[parseInt(elm.month) - 1] + " " + elm.year;
+        arr.push(string);
+        return arr;
+    }, []);
+
+    myData = dates.reduce((arr, elm) => {
+        arr.push(elm.num);
+        return arr;
+    }, []);
+
+    const maxVal = Math.max(...myData) + 5;
+
+    var ctx = document.getElementById("myAreaChart");
+    var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: myLabels,
+            datasets: [{
+                label: "Cases",
+                lineTension: 0.3,
+                backgroundColor: "rgba(2,117,216,0.2)",
+                borderColor: "rgba(2,117,216,1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(2,117,216,1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(2,117,216,1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: myData,
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                xAxes: [{
+                    time: {
+                        unit: 'date'
+                    },
+                    gridLines: {
+                        display: false
+                    },
+                    ticks: {
+                        maxTicksLimit: 7
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: maxVal,
+                        maxTicksLimit: 5
+                    },
+                    gridLines: {
+                        color: "rgba(0, 0, 0, .125)",
+                    }
+                }],
+            },
+            legend: {
+                display: false
+            }
+        }
+    });
+</script>
+
+<script>
+// Set new default font family and font color to mimic Bootstrap's default styling
+Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+Chart.defaults.global.defaultFontColor = '#858796';
+
+// Pie Chart Example
+var ctx = document.getElementById("locationsOnlyChart");
+var locations = {{location|tojson}};
+if(locations === null || locations === undefined || locations === ''){
+        locations = 'Australia';
+    } 
+if (!(ctx === null)) {
+  var locationsOnlyChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: [locations, 'Other', 'South Africa', 'Uruguay', 'Mexico', 'Malaysia', 'Germany'],
+      datasets: [{
+        data: [10, 30, 10, 20, 15, 7, 8],
+        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#FF0000', '#8B4513', '#FF8C00', '#FFD700'],
+        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+        hoverBorderColor: "rgba(234, 236, 244, 1)",
+      }],
+    },
+    options: {
+      maintainAspectRatio: false,
+      tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        caretPadding: 10,
+      },
+      legend: {
+        display: true,
+        position: "right"
+      },
+      cutoutPercentage: 80,
+    },
+  });
+}
+var ctx2 = document.getElementById("diseaseOnlyChart");
+if (!(ctx2 === null)) {
+    var diseases = {{disease|tojson}};
+    if(diseases === null || diseases === undefined || diseases === ''){
+        diseases = 'Flu';
+    } 
+  var diseaseOnlyChart = new Chart(ctx2, {
+    type: 'doughnut',
+    data: {
+      labels: [diseases, 'Ebola', 'Breast Cancer', 'Cholera', 'Measles', 'H7N9', 'Other'],
+      datasets: [{
+        data: [30, 10, 10, 20, 15, 7, 8],
+        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#FF0000', '#8B4513', '#FF8C00', '#FFD700'],
+        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+        hoverBorderColor: "rgba(234, 236, 244, 1)",
+      }],
+    },
+    options: {
+      maintainAspectRatio: false,
+      tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        caretPadding: 10,
+      },
+      legend: {
+        display: true,
+        position: "right"
+      },
+      cutoutPercentage: 80,
+    },
+  });
+}
+
+var ctx3 = document.getElementById("bothChart");
+if (!(ctx3 === null)) {
+  var bothChart = new Chart(ctx3, {
+    type: 'doughnut',
+    data: {
+      labels: ['Hospitalised', 'Infected', 'Recovered', 'Died'],
+      datasets: [{
+        data: [{{hosp|tojson}}, {{infected|tojson}}, {{recovered|tojson}}, {{death|tojson}}],
+        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#FF0000'],
+        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+        hoverBorderColor: "rgba(234, 236, 244, 1)",
+      }],
+    },
+    options: {
+      maintainAspectRatio: false,
+      tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        caretPadding: 10,
+      },
+      legend: {
+        display: true,
+        position: "right"
+      },
+      cutoutPercentage: 80,
+    },
+  });
+}
+</script>
+
+</html>

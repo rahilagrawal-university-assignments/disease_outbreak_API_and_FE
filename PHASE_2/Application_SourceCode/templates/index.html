@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<style>
+  
+</style>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Outbreak Alerts</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="../static/styles/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Page level plugin CSS-->
+  <link href="../static/styles/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="../static/styles/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <link href="../static/styles/css/styles.css" rel="stylesheet" type="text/css">
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Marck+Script" rel="stylesheet">
+</head>
+
+<body class="hero-bkg-animated" id="page-top">
+  <nav class="navbar navbar-expand navbar-dark static-top">
+
+    <a class="navbar-brand mr-1" style="font-family: 'Marck Script', cursive" href="/">BearHouse</a>
+
+  </nav>
+
+  <div class="jumbotron text-center" style="background: none">
+      <h1 style="font-family: 'Marck Script', cursive;color: white">Outbreak Alerts</h1>
+    <p style="font-family: 'Marck Script', cursive;color: white">Search for outbreaks by location or name below</p>
+    {% if fail == 1%}
+    <div class="alert alert-danger alert-dismissible fade show" style="position:absolute;left:50%;transform:translateX(-50%);width:80%" role="alert">
+      <strong>Need more info!</strong> Please enter at least location or disease
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %}
+
+    {% if fail == 2%}
+    <div class="alert alert-danger alert-dismissible fade show" style="position:absolute;left:50%;transform:translateX(-50%);width:80%" role="alert">
+      <strong>No outbreaks found!</strong> The search terms returned no results. Please enter more specific terms
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="card mx-auto col-md-8 bg-light">
+    
+    <div class="card-body">
+      <form method="POST">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="location" style="color:#606060">Location</label>
+              <input type="text" class="form-control bg-light" id="location" name="location" placeholder="Eg: Australia">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="disease" style="color:#606060">Disease</label>
+              <input type="text" class="form-control bg-light" id="disease" name="disease" placeholder="Eg: Anthrax">
+            </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="startDate" style="color:#606060">Start Date</label>
+            <input type="date" class="form-control bg-light" id="startDate" aria-describedby="startHelp" name="startDate">
+          </div>
+            <div class="form-group col-md-6">
+            <label for="endDate" style="color:#606060">End Date</label>
+            <input type="date" class="form-control bg-light" id="endDate" aria-describedby="endHelp" name="endDate">
+          </div>
+        </div>
+        
+        <div><small style="color: crimson"> * </small><small>Enter at least one of Location and Disease</small></div>
+        <div><small style="color: crimson"> * </small><small>Time fields are optional</small></div>
+      <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+ 
+      </form>
+    </div>
+  </div>
+  
+  <!-- Bootstrap core JavaScript-->
+  <script src="../static/styles/vendor/jquery/jquery.min.js"></script>
+  <script src="../static/styles/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="../static/styles/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Page level plugin JavaScript-->
+  <script src="../static/styles/vendor/chart.js/Chart.min.js"></script>
+  <script src="../static/styles/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="../static/styles/vendor/datatables/dataTables.bootstrap4.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="../static/styles/js/sb-admin.min.js"></script>
+
+  <!-- Demo scripts for this page-->
+  <script src="../static/styles/js/demo/datatables-demo.js"></script>
+  <script src="../static/styles/js/demo/chart-area-demo.js"></script>
+</body>
+
+</html>
